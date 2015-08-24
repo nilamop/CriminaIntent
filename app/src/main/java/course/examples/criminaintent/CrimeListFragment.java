@@ -2,7 +2,10 @@ package course.examples.criminaintent;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -13,6 +16,8 @@ import java.util.ArrayList;
  *  who answer for create list on my screen using sdk sample
  */
 public class CrimeListFragment extends ListFragment {
+    private static final String TAG = "CrimeListFragment";
+
     private ArrayList<Crime> mCrimes;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,5 +31,14 @@ public class CrimeListFragment extends ListFragment {
                         android.R.layout.simple_list_item_1, //use sample Android SDK
                         mCrimes);
         setListAdapter(adapter);
+    }
+
+    // We use method ListFragment's - getListAdapter
+    // we get adapter(variable) our list
+    // and after use method getItem adapter's with position parameter of onListItemClick
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        Crime c = (Crime)(getListAdapter()).getItem(position);
+        Log.d(TAG, c.getTitle() + " was clicked");
     }
 }
