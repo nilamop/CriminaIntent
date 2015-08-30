@@ -30,10 +30,12 @@ public class CrimeListFragment extends ListFragment {
         mCrimes = CrimeLab.get(getActivity()).getCrimes();
 
         //Create ArrayAdapter, who uses ListView for CrimeListFragment
-        ArrayAdapter<Crime> adapter =
+        /**ArrayAdapter<Crime> adapter =
                 new ArrayAdapter<Crime>(getActivity(),
                         android.R.layout.simple_list_item_1, //use sample Android SDK
-                        mCrimes);
+                        mCrimes); */
+        // create variable adapter with parameter(objects) mCrimes
+        CrimeAdapter adapter = new CrimeAdapter(mCrimes);
         setListAdapter(adapter);
     }
 
@@ -42,7 +44,8 @@ public class CrimeListFragment extends ListFragment {
     // and after use method getItem adapter's with position parameter of onListItemClick
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Crime c = (Crime) (getListAdapter()).getItem(position);
+        //Crime c = (Crime) (getListAdapter()).getItem(position);
+        Crime c = ((CrimeAdapter)getListAdapter()).getItem(position);
         Log.d(TAG, c.getTitle() + " was clicked");
     }
 
